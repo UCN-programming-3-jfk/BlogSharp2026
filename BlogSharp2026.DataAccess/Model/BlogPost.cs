@@ -19,4 +19,8 @@ public class BlogPost
     public string PostContent { get; set; }
     public DateTime CreationDate { get; set; }
 
+    public override string ToString()
+    {
+        return $"BlogPost {{ Id = {Id}, FK_Author_Id = {FK_Author_Id}, PostTitle = '{PostTitle}', PostContent = '{PostContent}', CreationDate = {CreationDate:O} }}";
+    }
 }

@@ -7,4 +7,8 @@ public class Author
     public string Email { get; set; }
     public string PasswordHash { get; set; }
 
+    public override string ToString()
+    {
+        return $"Author {{ Id = {Id}, BlogTitle = '{BlogTitle}', Email = '{Email}', PasswordHash = '{PasswordHash}' }}";
+    }
 }

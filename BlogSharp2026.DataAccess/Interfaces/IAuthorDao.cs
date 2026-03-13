@@ -4,10 +4,9 @@ namespace BlogSharp2026.DataAccess.Interfaces;
 
 public interface IAuthorDao
 {
+    Author? GetAuthorById(int id);
     IEnumerable<Author> GetAllAuthors();
-    Author GetAuthorById(int id);
+    int InsertAuthor(Author author);
     bool UpdateAuthor(Author author);
     bool DeleteAuthor(int id);
-    bool InsertAuthor(Author author);
-
 }

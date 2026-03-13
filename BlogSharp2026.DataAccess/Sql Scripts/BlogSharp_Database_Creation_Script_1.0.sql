@@ -42,6 +42,9 @@ CREATE TABLE [dbo].[BlogPost](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
+ALTER TABLE [dbo].[BlogPost] ADD  CONSTRAINT [DF_BlogPost_CreationDate]  DEFAULT (sysdatetime()) FOR [CreationDate]
+GO
+
 
 CREATE UNIQUE NONCLUSTERED INDEX [UniqueBlogTitle]
 ON [dbo].[Author] ([BlogTitle] ASC)
