@@ -1,0 +1,62 @@
+﻿USE [master]
+GO
+
+CREATE DATABASE [BlogSharp2026]
+GO
+
+USE [BlogSharp2026]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Author](
+	[Id] INT NOT NULL,
+	[Email] NVARCHAR(150) NOT NULL,
+	[BlogTitle] NVARCHAR(100) NOT NULL,
+	[PasswordHash] CHAR(60) NOT NULL,
+ CONSTRAINT [PK_Author] PRIMARY KEY CLUSTERED
+(
+	[Id] ASC
+)
+) ON [PRIMARY]
+GO
+
+
+CREATE TABLE [dbo].[BlogPost](
+	[Id] INT NOT NULL,
+	[FK_Author_Id] INT NOT NULL,
+	[PostTitle] NVARCHAR(100) NOT NULL,
+	[PostContent] NVARCHAR(MAX) NOT NULL,
+	[CreationDate] DATETIME2(7) NOT NULL,
+ CONSTRAINT [PK_BlogPost] PRIMARY KEY CLUSTERED
+(
+	[Id] ASC
+),
+ CONSTRAINT [FK_BlogPost_Author] FOREIGN KEY ([FK_Author_Id])
+ REFERENCES [dbo].[Author]([Id])
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+CREATE UNIQUE NONCLUSTERED INDEX [UniqueBlogTitle]
+ON [dbo].[Author] ([BlogTitle] ASC)
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [UniqueEmail]
+ON [dbo].[Author] ([Email] ASC)
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [UniqueTitle]
+ON [dbo].[BlogPost] ([PostTitle] ASC)
+GO
+
+
+USE [master]
+GO
+ALTER DATABASE [BlogSharp2026] SET READ_WRITE
+GO

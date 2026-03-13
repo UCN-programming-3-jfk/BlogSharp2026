@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="BlogSharp2026.DataAccess/BlogSharp2026.DataAccess.csproj" />
+  <Project Path="BlogSharp2026.Test/BlogSharp2026.Test.csproj" Id="accfd6dd-5a77-44b4-9efc-3aa2af59a716" />
+</Solution>
