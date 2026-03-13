@@ -11,6 +11,11 @@ namespace BlogSharp2026.DataAccess.SqlClient;
 
 public class AuthorDao : BaseDao, IAuthorDao
 {
+    public AuthorDao(string connectionString) : base(connectionString)
+    {
+        
+    }
+
     public bool DeleteAuthor(int id)
     {
         throw new NotImplementedException();
