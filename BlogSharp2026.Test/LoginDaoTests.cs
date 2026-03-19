@@ -156,17 +156,16 @@ public class LoginDaoTests
     {
         var author = new Author
         {
-            Id = GenerateUniqueId(),
             BlogTitle = $"Test Blog {Guid.NewGuid()}",
             Email = $"test{Guid.NewGuid()}@example.com",
             PasswordHash = password // Cleartext password - will be hashed by InsertAuthor
         };
 
-        _authorDao.InsertAuthor(author);
-        _cleanupAuthorIds.Add(author.Id);
+        var newId =_authorDao.InsertAuthor(author);
+        _cleanupAuthorIds.Add(newId);
 
         // Retrieve the author to get the hashed password
-        return _authorDao.GetAuthorById(author.Id)!;
+        return _authorDao.GetAuthorById(newId)!;
     }
 
     #endregion

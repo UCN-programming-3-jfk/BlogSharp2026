@@ -74,7 +74,7 @@ public class BlogPostDao : BaseDao, IBlogPostDao
     {
         try
         {
-            var query = "INSERT INTO BlogPost (Id, FK_Author_Id, PostTitle, PostContent, CreationDate) VALUES (@Id, @FK_Author_Id, @PostTitle, @PostContent, @CreationDate); SELECT @Id;";
+            var query = "INSERT INTO BlogPost (FK_Author_Id, PostTitle, PostContent, CreationDate) OUTPUT Inserted.Id VALUES (@FK_Author_Id, @PostTitle, @PostContent, @CreationDate);";
             using var connection = CreateConnection();
             var newId = connection.QuerySingle<int>(query, blogPost);
             return newId;

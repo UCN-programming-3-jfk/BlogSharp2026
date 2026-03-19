@@ -58,10 +58,10 @@ public class AuthorDao : BaseDao, IAuthorDao
             // Hash the cleartext password using BCrypt before saving
             author.PasswordHash = BCrypt.Net.BCrypt.HashPassword(author.PasswordHash);
 
-            var query = "INSERT INTO Author (Id, Email, BlogTitle, PasswordHash) VALUES (@Id, @Email, @BlogTitle, @PasswordHash); SELECT @Id;";
+            var query = "INSERT INTO Author (Email, BlogTitle, PasswordHash) OUTPUT INSERTED.Id  VALUES (@Email, @BlogTitle, @PasswordHash); ";
             using var connection = CreateConnection();
-            var newId = connection.QuerySingle(query, author);
-            return newId;
+            var newId = connection.QuerySingle<int>(query, author);
+            return  newId;
         }
         catch (Exception ex)
         {

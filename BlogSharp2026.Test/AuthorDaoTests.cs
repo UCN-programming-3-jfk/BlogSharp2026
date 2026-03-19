@@ -67,19 +67,16 @@ public class AuthorDaoTests
         // Arrange
         var author = new Author
         {
-            Id = GenerateUniqueId(),
             BlogTitle = $"Test Blog {Guid.NewGuid()}",
             Email = $"test{Guid.NewGuid()}@example.com",
             PasswordHash = "cleartextPassword123" // Cleartext password - will be hashed by InsertAuthor
         };
-        _cleanupAuthorIds.Add(author.Id);
 
         // Act
         int newId = _authorDao.InsertAuthor(author);
+        _cleanupAuthorIds.Add(newId);
 
         // Assert
-        Assert.That(newId, Is.EqualTo(author.Id), "Returned ID should match the inserted author ID");
-
         // Verify the author was actually inserted
         Author? insertedAuthor = _authorDao.GetAuthorById(newId);
         Assert.That(insertedAuthor, Is.Not.Null, "Inserted author should be retrievable");
@@ -169,17 +166,16 @@ public class AuthorDaoTests
     {
         var author = new Author
         {
-            Id = GenerateUniqueId(),
             BlogTitle = $"Test Blog {Guid.NewGuid()}",
             Email = $"test{Guid.NewGuid()}@example.com",
             PasswordHash = "testPassword123" // Cleartext password - will be hashed by InsertAuthor
         };
 
-        _authorDao.InsertAuthor(author);
-        _cleanupAuthorIds.Add(author.Id);
+        var id =  _authorDao.InsertAuthor(author);
+        _cleanupAuthorIds.Add(id);
 
         // Retrieve the author to get the hashed password
-        return _authorDao.GetAuthorById(author.Id)!;
+        return _authorDao.GetAuthorById(id)!;
     }
 
     #endregion

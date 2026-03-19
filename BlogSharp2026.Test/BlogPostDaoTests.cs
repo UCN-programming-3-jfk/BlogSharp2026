@@ -128,19 +128,18 @@ public class BlogPostDaoTests
         var testAuthor = CreateTestAuthor();
         var blogPost = new BlogPost
         {
-            Id = GenerateUniqueId(),
             FK_Author_Id = testAuthor.Id,
             PostTitle = $"Test Post {Guid.NewGuid()}",
             PostContent = "This is test content for the blog post.",
             CreationDate = DateTime.Now
         };
-        _cleanupBlogPostIds.Add(blogPost.Id);
 
         // Act
         int newId = _blogPostDao.InsertBlogPost(blogPost);
+        _cleanupBlogPostIds.Add(newId);
 
         // Assert
-        Assert.That(newId, Is.EqualTo(blogPost.Id), "Returned ID should match the inserted blog post ID");
+        Assert.That(newId, Is.GreaterThan(0), "Returned ID should match the inserted blog post ID");
 
         // Verify the blog post was actually inserted
         BlogPost? insertedBlogPost = _blogPostDao.GetBlogPostById(newId);
@@ -236,32 +235,31 @@ public class BlogPostDaoTests
     {
         var author = new Author
         {
-            Id = GenerateUniqueId(),
             BlogTitle = $"Test Blog {Guid.NewGuid()}",
             Email = $"test{Guid.NewGuid()}@example.com",
             PasswordHash = "testPassword123" // Cleartext password - will be hashed by InsertAuthor
         };
 
-        _authorDao.InsertAuthor(author);
-        _cleanupAuthorIds.Add(author.Id);
+        var newId =_authorDao.InsertAuthor(author);
+        _cleanupAuthorIds.Add(newId);
 
         // Retrieve the author to get the hashed password
-        return _authorDao.GetAuthorById(author.Id)!;
+        return _authorDao.GetAuthorById(newId)!;
     }
 
     private BlogPost CreateTestBlogPost(int authorId)
     {
         var blogPost = new BlogPost
         {
-            Id = GenerateUniqueId(),
             FK_Author_Id = authorId,
             PostTitle = $"Test Post {Guid.NewGuid()}",
             PostContent = "This is test content for the blog post.",
             CreationDate = DateTime.Now
         };
 
-        _blogPostDao.InsertBlogPost(blogPost);
-        _cleanupBlogPostIds.Add(blogPost.Id);
+        var newId =_blogPostDao.InsertBlogPost(blogPost);
+        _cleanupBlogPostIds.Add(newId);
+        blogPost.Id = newId;
 
         return blogPost;
     }
