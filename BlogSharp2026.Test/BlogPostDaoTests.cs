@@ -5,7 +5,7 @@ namespace BlogSharp2026.Test;
 
 public class BlogPostDaoTests
 {
-    const string CONNECTION_STRING = "Data Source =.;Initial Catalog=BlogSharp2026; Integrated Security = True;Trust Server Certificate = True;";
+   
 
     BlogPostDao _blogPostDao;
     AuthorDao _authorDao;
@@ -15,8 +15,8 @@ public class BlogPostDaoTests
     [SetUp]
     public void Setup()
     {
-        _blogPostDao = new BlogPostDao(CONNECTION_STRING);
-        _authorDao = new AuthorDao(CONNECTION_STRING);
+        _blogPostDao = new BlogPostDao(TestSettings.CONNECTION_STRING);
+        _authorDao = new AuthorDao(TestSettings.CONNECTION_STRING);
     }
 
     [TearDown]

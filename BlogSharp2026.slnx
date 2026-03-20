@@ -1,4 +1,7 @@
 <Solution>
+  <Project Path="BlogSharp2026.Api/BlogSharp2026.Api.csproj" Id="fba1457b-7bd3-476d-879a-f4ff3738908d" />
+  <Project Path="BlogSharp2026.ApiClientConsoleTester/BlogSharp2026.ApiClientConsoleTester.csproj" Id="961950ea-eabe-4276-a9a5-dab16d0ed976" />
   <Project Path="BlogSharp2026.DataAccess/BlogSharp2026.DataAccess.csproj" />
   <Project Path="BlogSharp2026.Test/BlogSharp2026.Test.csproj" Id="accfd6dd-5a77-44b4-9efc-3aa2af59a716" />
+  <Project Path="RestSharp2026.ApiClient/RestSharp2026.ApiClient.csproj" Id="5d8de015-f6a8-491b-9fe6-11fdf300b54f" />
 </Solution>

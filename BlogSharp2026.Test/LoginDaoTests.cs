@@ -5,7 +5,7 @@ namespace BlogSharp2026.Test;
 
 public class LoginDaoTests
 {
-    const string CONNECTION_STRING = "Data Source =.;Initial Catalog=BlogSharp2026; Integrated Security = True;Trust Server Certificate = True;";
+    
     const string TEST_PASSWORD = "testPassword123";
 
     LoginDao _loginDao;
@@ -15,8 +15,8 @@ public class LoginDaoTests
     [SetUp]
     public void Setup()
     {
-        _loginDao = new LoginDao(CONNECTION_STRING);
-        _authorDao = new AuthorDao(CONNECTION_STRING);
+        _loginDao = new LoginDao(TestSettings.CONNECTION_STRING);
+        _authorDao = new AuthorDao(TestSettings.CONNECTION_STRING);
     }
 
     [TearDown]
