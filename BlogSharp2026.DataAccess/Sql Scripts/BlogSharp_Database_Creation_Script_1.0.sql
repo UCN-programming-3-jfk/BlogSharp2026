@@ -21,7 +21,7 @@ CREATE TABLE [dbo].[Author](
 (
 	[Id] ASC
 )
--) ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
 
