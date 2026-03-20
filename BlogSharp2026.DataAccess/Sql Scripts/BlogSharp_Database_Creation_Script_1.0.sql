@@ -21,12 +21,12 @@ CREATE TABLE [dbo].[Author](
 (
 	[Id] ASC
 )
-) ON [PRIMARY]
+-) ON [PRIMARY]
 GO
 
 
 CREATE TABLE [dbo].[BlogPost](
-	[Id] INT NOT NULL,
+	[Id] INT NOT NULL IDENTITY (1,1),
 	[FK_Author_Id] INT NOT NULL,
 	[PostTitle] NVARCHAR(100) NOT NULL,
 	[PostContent] NVARCHAR(MAX) NOT NULL,
