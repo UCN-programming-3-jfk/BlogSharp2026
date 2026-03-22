@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,11 @@ public class BlogPost
 {
     public int Id { get; set; }
     public int FK_Author_Id { get; set; }
+    [Required]
+    [MaxLength(150)]
     public string PostTitle { get; set; }
+    [Required]
+    [MinLength(10)]
     public string PostContent { get; set; }
     public DateTime CreationDate { get; set; }
 
