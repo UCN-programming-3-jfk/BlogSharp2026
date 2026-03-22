@@ -10,7 +10,14 @@ namespace BlogSharp2026.Api.Controllers;
 public class AuthorsController : ControllerBase
 {
     IAuthorDao _authorDao;
-    public AuthorsController() => _authorDao = new AuthorDao("Data Source =.;Initial Catalog=BlogSharp2026; Integrated Security = True;Trust Server Certificate = True;");
+    IBlogPostDao _blogPostDao;
+
+    public AuthorsController()
+    {
+        var connectionString = "Data Source =.;Initial Catalog=BlogSharp2026; Integrated Security = True;Trust Server Certificate = True;";
+        _authorDao = new AuthorDao(connectionString);
+        _blogPostDao = new BlogPostDao(connectionString);
+    }
 
     [HttpGet]
     public ActionResult<IEnumerable<Author>> Get()
@@ -110,6 +117,20 @@ public class AuthorsController : ControllerBase
         catch (Exception ex)
         {
             return StatusCode(500, new { message = $"Error deleting author with id {id}", error = ex.Message });
+        }
+    }
+
+    [HttpGet("{authorId}/blogposts")]
+    public ActionResult<IEnumerable<BlogPost>> GetBlogPosts(int authorId)
+    {
+        try
+        {
+            var blogPosts = _blogPostDao.GetBlogPostsByAuthorId(authorId);
+            return Ok(blogPosts);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = $"Error retrieving blog posts for author {authorId}", error = ex.Message });
         }
     }
 }
