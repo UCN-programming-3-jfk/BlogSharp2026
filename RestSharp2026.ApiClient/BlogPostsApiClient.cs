@@ -47,7 +47,7 @@ public class BlogPostsApiClient : IBlogPostDao
         return response ?? new List<BlogPost>();
     }
 
-    public IEnumerable<BlogPost> GetLatestBlogPosts(int authorId, int numberOfBlogPostsToRetrieve = 10)
+    public IEnumerable<BlogPost> GetLatestBlogPosts(int numberOfBlogPostsToRetrieve = 10)
     {
         var request = new RestRequest();
         request.AddQueryParameter("numberofblogposts", numberOfBlogPostsToRetrieve);
