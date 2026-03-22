@@ -11,20 +11,7 @@ internal class Program
         Console.WriteLine("AuthorsApiClient Test Suite");
         Console.WriteLine("========================================\n");
 
-        Console.WriteLine("Waiting for API to start...");
-
         AuthorsApiClient client = new AuthorsApiClient("https://localhost:7113/api/v1/authors");
-
-        // Wait for API to be ready with retry logic
-        if (!WaitForApiToBeReady(client))
-        {
-            Console.WriteLine("[ERROR] API did not start in time. Please ensure the API is running.");
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadLine();
-            return;
-        }
-
-        Console.WriteLine("✓ API is ready!\n");
 
         try
         {
@@ -61,33 +48,6 @@ internal class Program
 
         Console.WriteLine("\nPress any key to exit...");
         Console.ReadLine();
-    }
-
-    static bool WaitForApiToBeReady(AuthorsApiClient client, int maxAttempts = 30, int delayMs = 1000)
-    {
-        Console.WriteLine($"Attempting to connect to API (max {maxAttempts} attempts)...");
-
-        for (int i = 1; i <= maxAttempts; i++)
-        {
-            try
-            {
-                Console.Write($"Attempt {i}/{maxAttempts}... ");
-                var authors = client.GetAllAuthors();
-                // If we get here without exception, API is ready
-                Console.WriteLine("Success!");
-                return true;
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Not ready yet.");
-                if (i < maxAttempts)
-                {
-                    Thread.Sleep(delayMs);
-                }
-            }
-        }
-
-        return false;
     }
 
     static void TestGetAllAuthors(AuthorsApiClient client)
