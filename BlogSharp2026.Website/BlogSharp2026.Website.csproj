@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlogSharp2026.DataAccess\BlogSharp2026.DataAccess.csproj" />
+    <ProjectReference Include="..\RestSharp2026.ApiClient\RestSharp2026.ApiClient.csproj" />
+  </ItemGroup>
+
+</Project>
