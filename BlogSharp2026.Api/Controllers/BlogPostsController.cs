@@ -14,7 +14,9 @@ public class BlogPostsController : ControllerBase
     public BlogPostsController() => _blogPostDao = new BlogPostDao("Data Source =.;Initial Catalog=BlogSharp2026; Integrated Security = True;Trust Server Certificate = True;");
 
     [HttpGet]
-    public ActionResult<IEnumerable<BlogPost>> Get([FromQuery] string orderby = "", [FromQuery] int amount = 10)
+    public ActionResult<IEnumerable<BlogPost>> Get(
+        [FromQuery] string orderby = "", 
+        [FromQuery] int amount = 10)
     {
         try
         {

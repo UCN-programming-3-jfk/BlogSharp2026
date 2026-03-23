@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.23" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BlogSharp2026.DataAccess\BlogSharp2026.DataAccess.csproj" />
     <ProjectReference Include="..\RestSharp2026.ApiClient\RestSharp2026.ApiClient.csproj" />
   </ItemGroup>

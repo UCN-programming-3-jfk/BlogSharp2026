@@ -11,9 +11,11 @@ public class HomeController : Controller
 
     IBlogPostDao _blogPostApiClient = new BlogPostsApiClient("https://localhost:7113/api/v1/blogposts");
 
+    //shows the front page with 10 latest blogposts
     public IActionResult Index()
     {
-        return View();
+        var tenLatestBlogPosts = _blogPostApiClient.GetLatestBlogPosts(numberOfBlogPostsToRetrieve:10);
+        return View(tenLatestBlogPosts);
     }
 
     public IActionResult Privacy()
