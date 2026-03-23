@@ -65,9 +65,18 @@ public class BlogPostDao : BaseDao, IBlogPostDao
         }
     }
 
-    public IEnumerable<BlogPost> GetLatestBlogPosts(int authorId, int numberOfBlogPostsToRetrieve = 10)
+    public IEnumerable<BlogPost> GetLatestBlogPosts(int numberOfBlogPostsToRetrieve = 10)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var query = "SELECT TOP(@NumberOfPosts) * FROM BlogPost ORDER BY CreationDate DESC";
+            using var connection = CreateConnection();
+            return connection.Query<BlogPost>(query, new { NumberOfPosts = numberOfBlogPostsToRetrieve });
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error while trying to get latest blog posts. Error was: '{ex.Message}'", ex);
+        }
     }
 
     public int InsertBlogPost(BlogPost blogPost)

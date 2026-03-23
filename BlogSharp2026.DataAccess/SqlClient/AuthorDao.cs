@@ -43,7 +43,7 @@ public class AuthorDao : BaseDao, IAuthorDao
         {
             var query = "SELECT * FROM Author WHERE Id=@Id";
             using var connection = CreateConnection();
-            return connection.QuerySingle<Author>(query, new { id });
+            return connection.QuerySingleOrDefault<Author>(query, new { id });
         }
         catch (Exception ex)
         {

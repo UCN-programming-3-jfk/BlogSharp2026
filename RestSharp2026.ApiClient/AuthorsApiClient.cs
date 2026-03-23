@@ -17,7 +17,9 @@ public class AuthorsApiClient : IAuthorDao
     }
     public bool DeleteAuthor(int id)
     {
-        throw new NotImplementedException();
+        var request = new RestRequest($"{id}", Method.Delete);
+        var response = _client.Execute(request);
+        return response.IsSuccessful;
     }
 
     public IEnumerable<Author> GetAllAuthors()
@@ -27,16 +29,37 @@ public class AuthorsApiClient : IAuthorDao
 
     public Author? GetAuthorById(int id)
     {
-        throw new NotImplementedException();
+        var request = new RestRequest($"{id}");
+        var response = _client.Execute<Author>(request);
+
+        if (response.IsSuccessful && response.Data != null)
+        {
+            return response.Data;
+        }
+
+        // Return null for 404 or any unsuccessful response
+        return null;
     }
 
     public int InsertAuthor(Author author)
     {
-        throw new NotImplementedException();
+        var request = new RestRequest("", Method.Post);
+        request.AddJsonBody(author);
+        var response = _client.Execute<int>(request);
+
+        if (response.IsSuccessful && response.Data != 0)
+        {
+            return response.Data;
+        }
+
+        throw new Exception($"Failed to insert author. Status: {response.StatusCode}, Error: {response.ErrorMessage}");
     }
 
     public bool UpdateAuthor(Author author)
     {
-        throw new NotImplementedException();
+        var request = new RestRequest($"{author.Id}", Method.Put);
+        request.AddJsonBody(author);
+        var response = _client.Execute(request);
+        return response.IsSuccessful;
     }
 }
