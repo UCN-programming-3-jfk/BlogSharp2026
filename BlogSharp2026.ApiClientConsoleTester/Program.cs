@@ -12,6 +12,8 @@ internal class Program
         AuthorsApiClient _client = new AuthorsApiClient("https://localhost:7113/api/v1/authors");
         //use the api client to retrieve all authors
         var authors = _client.GetAllAuthors();
+
+
         
         //print all authors to the console
         authors.ToList().ForEach(Console.WriteLine);
