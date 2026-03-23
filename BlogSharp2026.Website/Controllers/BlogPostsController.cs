@@ -1,4 +1,5 @@
 ﻿using BlogSharp2026.DataAccess.Interfaces;
+using BlogSharp2026.DataAccess.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp2026.ApiClient;
@@ -31,13 +32,15 @@ public class BlogPostsController : Controller
     // POST: BlogPostsController/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create(IFormCollection collection)
+    public ActionResult Create(BlogPost blogpost)
     {
         try
         {
-            return RedirectToAction(nameof(Index));
+            blogpost.CreationDate = DateTime.Now;
+            _blogPostApiClient.InsertBlogPost(blogpost);
+            return RedirectToAction(nameof(Index), "Home");
         }
-        catch
+        catch 
         {
             return View();
         }
